@@ -1,12 +1,12 @@
-# Ubuntu Server Deployment Guide
+# Ubuntu Server Deployment Guide (Port-Based)
 
 ## 2026.01.15 ALPHA TEAM 프로젝트 배포 가이드
+
+**포트 기반 운영** - `http://서버IP:3000` 형태로 접근
 
 ---
 
 ## 1. 사전 요구사항
-
-Ubuntu 서버에 Node.js와 Nginx가 설치되어 있어야 합니다.
 
 ```bash
 # Node.js 설치 (20.x LTS)
@@ -17,7 +17,7 @@ sudo apt-get install -y nodejs
 sudo apt-get update
 sudo apt-get install -y nginx
 
-# Git 설치 (없는 경우)
+# Git 설치
 sudo apt-get install -y git
 ```
 
@@ -25,28 +25,26 @@ sudo apt-get install -y git
 
 ## 2. 프로젝트 배포
 
-### 2.1 GitHub에서 클론
-
 ```bash
+# 프로젝트 폴더 생성 및 클론
 cd /var/www
 sudo git clone https://github.com/imorangepie20/humamAppleTeamPreject001.git alpha-team
 cd alpha-team
-```
 
-### 2.2 의존성 설치 및 빌드
-
-```bash
+# 의존성 설치 및 빌드
 sudo npm install
 sudo npm run build
-```
 
-빌드 완료 후 `dist` 폴더가 생성됩니다.
+# 권한 설정
+sudo chown -R www-data:www-data dist
+sudo chmod -R 755 dist
+```
 
 ---
 
-## 3. Nginx 설정
+## 3. Nginx 포트 기반 설정
 
-### 3.1 Nginx 설정 파일 생성
+### 3.1 포트 3000으로 설정
 
 ```bash
 sudo nano /etc/nginx/sites-available/alpha-team
@@ -56,8 +54,8 @@ sudo nano /etc/nginx/sites-available/alpha-team
 
 ```nginx
 server {
-    listen 80;
-    server_name your-domain.com;  # 또는 서버 IP
+    listen 3000;
+    server_name _;
 
     root /var/www/alpha-team/dist;
     index index.html;
@@ -66,7 +64,7 @@ server {
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 
-    # SPA 라우팅 지원
+    # SPA 라우팅 지원 (React Router)
     location / {
         try_files $uri $uri/ /index.html;
     }
@@ -76,101 +74,130 @@ server {
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
+
+    # 에러 페이지
+    error_page 404 /index.html;
 }
 ```
 
 ### 3.2 사이트 활성화
 
 ```bash
+# 심볼릭 링크 생성
 sudo ln -s /etc/nginx/sites-available/alpha-team /etc/nginx/sites-enabled/
+
+# 설정 검증
 sudo nginx -t
-sudo systemctl reload nginx
+
+# Nginx 재시작
+sudo systemctl restart nginx
 ```
 
 ---
 
-## 4. 빠른 배포 스크립트
+## 4. 방화벽 설정 (UFW)
 
-서버에서 직접 실행할 수 있는 일괄 배포 스크립트입니다.
+```bash
+# 포트 3000 열기
+sudo ufw allow 3000/tcp
+
+# 상태 확인
+sudo ufw status
+```
+
+---
+
+## 5. 접속 확인
+
+브라우저에서 접속:
+
+```
+http://서버IP:3000
+```
+
+예: `http://192.168.1.100:3000`
+
+---
+
+## 6. 다중 포트 운영 (여러 프로젝트)
+
+여러 프로젝트를 다른 포트로 운영하는 예:
+
+```nginx
+# /etc/nginx/sites-available/alpha-team (포트 3000)
+server {
+    listen 3000;
+    root /var/www/alpha-team/dist;
+    # ...
+}
+
+# /etc/nginx/sites-available/project-b (포트 3001)
+server {
+    listen 3001;
+    root /var/www/project-b/dist;
+    # ...
+}
+
+# /etc/nginx/sites-available/project-c (포트 3002)
+server {
+    listen 3002;
+    root /var/www/project-c/dist;
+    # ...
+}
+```
+
+---
+
+## 7. 자동 배포 스크립트
 
 ```bash
 #!/bin/bash
+# /var/www/alpha-team/deploy.sh
 
-# deploy.sh
 echo "🚀 ALPHA TEAM 배포 시작..."
 
 cd /var/www/alpha-team
+sudo git pull origin main
+sudo npm install
+sudo npm run build
+sudo chown -R www-data:www-data dist
+sudo systemctl restart nginx
 
-# 최신 코드 가져오기
-git pull origin main
-
-# 의존성 설치
-npm install
-
-# 프로덕션 빌드
-npm run build
-
-# Nginx 재시작
-sudo systemctl reload nginx
-
-echo "✅ 배포 완료!"
+echo "✅ 배포 완료! http://서버IP:3000 에서 확인"
 ```
 
-스크립트 생성 및 실행:
-
+실행:
 ```bash
-cd /var/www/alpha-team
-sudo nano deploy.sh
-sudo chmod +x deploy.sh
+chmod +x deploy.sh
 ./deploy.sh
 ```
 
 ---
 
-## 5. HTTPS 설정 (Let's Encrypt)
+## 8. 시스템 서비스로 등록 (부팅 시 자동 시작)
+
+Nginx는 기본적으로 시스템 부팅 시 자동 시작됩니다:
 
 ```bash
-# Certbot 설치
-sudo apt-get install -y certbot python3-certbot-nginx
+# 자동 시작 활성화 확인
+sudo systemctl enable nginx
 
-# SSL 인증서 발급
-sudo certbot --nginx -d your-domain.com
-
-# 자동 갱신 테스트
-sudo certbot renew --dry-run
+# 상태 확인
+sudo systemctl status nginx
 ```
 
 ---
 
-## 6. 방화벽 설정
+## 빠른 명령어 요약
 
-```bash
-# UFW 활성화
-sudo ufw allow 'Nginx Full'
-sudo ufw allow OpenSSH
-sudo ufw enable
-```
-
----
-
-## 7. 로컬에서 dist 폴더 업로드 (Git 없이)
-
-Windows에서 빌드 후 직접 업로드하는 방법:
-
-```powershell
-# PowerShell에서 SCP로 업로드
-scp -r dist/* username@your-server:/var/www/alpha-team/dist/
-```
-
----
-
-## 배포 확인
-
-브라우저에서 서버 IP 또는 도메인에 접속하여 확인합니다.
-
-```
-http://your-server-ip/
-```
+| 작업 | 명령어 |
+|------|--------|
+| 클론 | `git clone https://github.com/imorangepie20/humamAppleTeamPreject001.git` |
+| 빌드 | `npm install && npm run build` |
+| Nginx 설정 | `sudo nano /etc/nginx/sites-available/alpha-team` |
+| Nginx 재시작 | `sudo systemctl restart nginx` |
+| 포트 열기 | `sudo ufw allow 3000/tcp` |
+| 접속 | `http://서버IP:3000` |
 
 ---
 
@@ -182,16 +209,28 @@ sudo chown -R www-data:www-data /var/www/alpha-team/dist
 sudo chmod -R 755 /var/www/alpha-team/dist
 ```
 
+### 포트가 열리지 않음
+```bash
+# 방화벽 확인
+sudo ufw status
+
+# Nginx 에러 로그 확인
+sudo tail -f /var/log/nginx/error.log
+```
+
 ### 페이지 새로고침 시 404
-Nginx의 `try_files` 설정이 올바른지 확인하세요.
+Nginx 설정에 `try_files $uri $uri/ /index.html;` 있는지 확인
 
 ---
 
-## 요약
+## 최종 확인
 
-| 단계 | 명령어 |
-|------|--------|
-| 클론 | `git clone https://github.com/imorangepie20/humamAppleTeamPreject001.git` |
-| 빌드 | `npm install && npm run build` |
-| Nginx | `/etc/nginx/sites-available/alpha-team` 설정 |
-| 재시작 | `sudo systemctl reload nginx` |
+```bash
+# Nginx 상태
+sudo systemctl status nginx
+
+# 포트 리스닝 확인
+sudo netstat -tlnp | grep 3000
+# 또는
+sudo ss -tlnp | grep 3000
+```
