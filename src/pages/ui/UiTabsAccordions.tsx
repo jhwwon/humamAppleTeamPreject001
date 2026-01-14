@@ -12,8 +12,8 @@ const UiTabsAccordions = () => {
 
     const accordionItems = [
         {
-            title: 'What is HUD Admin Template?',
-            content: 'HUD Admin Template is a modern, responsive admin dashboard template built with React, TypeScript, and Tailwind CSS. It features a sleek dark theme with neon accents inspired by heads-up display interfaces.',
+            title: 'What is ALPHA TEAM Template?',
+            content: 'ALPHA TEAM Template is a modern, responsive admin dashboard template built with React, TypeScript, and Tailwind CSS. It features a sleek dark theme with neon accents inspired by heads-up display interfaces.',
         },
         {
             title: 'How do I customize the theme?',
@@ -54,8 +54,8 @@ const UiTabsAccordions = () => {
                                 key={tab}
                                 onClick={() => setActiveTab(i)}
                                 className={`px-4 py-3 text-sm font-medium transition-hud ${activeTab === i
-                                        ? 'text-hud-accent-primary border-b-2 border-hud-accent-primary -mb-px'
-                                        : 'text-hud-text-secondary hover:text-hud-text-primary'
+                                    ? 'text-hud-accent-primary border-b-2 border-hud-accent-primary -mb-px'
+                                    : 'text-hud-text-secondary hover:text-hud-text-primary'
                                     }`}
                             >
                                 {tab}
@@ -96,8 +96,8 @@ const UiTabsAccordions = () => {
                                 key={tab}
                                 onClick={() => setActivePillTab(i)}
                                 className={`px-4 py-2 text-sm font-medium rounded-md transition-hud ${activePillTab === i
-                                        ? 'bg-hud-accent-primary text-hud-bg-primary'
-                                        : 'text-hud-text-secondary hover:text-hud-text-primary hover:bg-hud-bg-hover'
+                                    ? 'bg-hud-accent-primary text-hud-bg-primary'
+                                    : 'text-hud-text-secondary hover:text-hud-text-primary hover:bg-hud-bg-hover'
                                     }`}
                             >
                                 {tab}
@@ -123,8 +123,8 @@ const UiTabsAccordions = () => {
                                     key={tab}
                                     onClick={() => setActiveVerticalTab(i)}
                                     className={`w-full px-4 py-2.5 text-sm font-medium text-left rounded-lg transition-hud ${activeVerticalTab === i
-                                            ? 'bg-hud-accent-primary/10 text-hud-accent-primary border-l-2 border-hud-accent-primary'
-                                            : 'text-hud-text-secondary hover:text-hud-text-primary hover:bg-hud-bg-hover'
+                                        ? 'bg-hud-accent-primary/10 text-hud-accent-primary border-l-2 border-hud-accent-primary'
+                                        : 'text-hud-text-secondary hover:text-hud-text-primary hover:bg-hud-bg-hover'
                                         }`}
                                 >
                                     {tab}
@@ -203,8 +203,8 @@ const UiTabsAccordions = () => {
                         <button
                             key={tab}
                             className={`px-4 py-3 text-sm font-medium transition-hud ${i === 0
-                                    ? 'text-hud-accent-primary border-b-2 border-hud-accent-primary -mb-px'
-                                    : 'text-hud-text-secondary hover:text-hud-text-primary'
+                                ? 'text-hud-accent-primary border-b-2 border-hud-accent-primary -mb-px'
+                                : 'text-hud-text-secondary hover:text-hud-text-primary'
                                 }`}
                         >
                             {tab}

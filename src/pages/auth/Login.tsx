@@ -17,7 +17,7 @@ const Login = () => {
                         <div className="w-12 h-12 bg-gradient-to-br from-hud-accent-primary to-hud-accent-info rounded-lg flex items-center justify-center font-bold text-xl text-hud-bg-primary">
                             H
                         </div>
-                        <span className="font-bold text-2xl text-hud-text-primary text-glow">HUD ADMIN</span>
+                        <span className="font-bold text-2xl text-hud-text-primary text-glow">ALPHA TEAM</span>
                     </div>
                     <h1 className="text-2xl font-bold text-hud-text-primary">Welcome Back</h1>
                     <p className="text-hud-text-muted mt-2">Sign in to your account to continue</p>

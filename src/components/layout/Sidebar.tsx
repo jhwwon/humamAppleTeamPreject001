@@ -147,7 +147,7 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
                         H
                     </div>
                     {!collapsed && (
-                        <span className="font-semibold text-lg text-glow">HUD ADMIN</span>
+                        <span className="font-semibold text-lg text-glow">ALPHA TEAM</span>
                     )}
                 </Link>
             </div>
