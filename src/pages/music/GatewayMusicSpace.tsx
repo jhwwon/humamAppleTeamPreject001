@@ -1,0 +1,210 @@
+import MusicSidebar from '../../components/music/MusicSidebar'
+import { Brain, Check, X, Play, Pause, SkipForward, Music, Star, ArrowRight, Eye, ThumbsUp, ThumbsDown, Sparkles, Filter } from 'lucide-react'
+import { useState } from 'react'
+
+interface AiPlaylist {
+    id: number
+    title: string
+    trackCount: number
+    aiScore: number
+    source: string
+    matchedTracks: number
+}
+
+const GatewayMusicSpace = () => {
+    const [playlists] = useState<AiPlaylist[]>([
+        { id: 1, title: 'Summer Vibes 2024', trackCount: 32, aiScore: 95, source: 'Tidal', matchedTracks: 28 },
+        { id: 2, title: 'K-POP Rising Stars', trackCount: 45, aiScore: 88, source: 'YouTube Music', matchedTracks: 35 },
+        { id: 3, title: 'Indie Discoveries', trackCount: 28, aiScore: 82, source: 'Apple Music', matchedTracks: 20 },
+        { id: 4, title: 'Late Night Jazz', trackCount: 38, aiScore: 78, source: 'Tidal', matchedTracks: 25 },
+        { id: 5, title: 'Workout Energy', trackCount: 50, aiScore: 72, source: 'YouTube Music', matchedTracks: 30 },
+    ])
+
+    const [previewMode, setPreviewMode] = useState(false)
+    const [currentTrack, setCurrentTrack] = useState({ title: 'Super Shy', artist: 'NewJeans', isPlaying: false })
+
+    const getScoreColor = (score: number) => {
+        if (score >= 85) return 'text-hud-accent-success bg-hud-accent-success/20 border-hud-accent-success/30'
+        if (score >= 70) return 'text-hud-accent-warning bg-hud-accent-warning/20 border-hud-accent-warning/30'
+        return 'text-hud-text-muted bg-hud-bg-secondary border-hud-border-secondary'
+    }
+
+    return (
+        <div className="min-h-screen bg-hud-bg-primary hud-grid-bg">
+            <MusicSidebar />
+
+            <main className="ml-0 md:ml-64 p-4 md:p-6">
+                {/* Header */}
+                <header className="mb-6">
+                    <h1 className="text-2xl md:text-3xl font-bold text-hud-accent-warning mb-2">The Lab (GMS)</h1>
+                    <p className="text-hud-text-secondary text-sm md:text-base">AI가 검증한 플레이리스트를 확인하고 승인하세요</p>
+                </header>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+                    {[
+                        { label: 'AI 검증 완료', value: '15', color: 'hud-accent-success' },
+                        { label: '고득점 (85+)', value: '5', color: 'hud-accent-primary' },
+                        { label: '검토 대기', value: '8', color: 'hud-accent-warning' },
+                        { label: '보류 중', value: '2', color: 'hud-text-muted' },
+                    ].map((stat) => (
+                        <div key={stat.label} className="hud-card hud-card-bottom rounded-xl p-4 text-center">
+                            <div className={`text-2xl font-bold text-${stat.color}`}>{stat.value}</div>
+                            <div className="text-xs text-hud-text-muted">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Quick Actions */}
+                <div className="flex flex-wrap gap-3 mb-6">
+                    <button
+                        onClick={() => setPreviewMode(!previewMode)}
+                        className={`px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all ${previewMode
+                            ? 'bg-hud-accent-primary text-hud-bg-primary'
+                            : 'bg-hud-bg-secondary border border-hud-border-secondary text-hud-text-primary hover:bg-hud-bg-hover'
+                            }`}
+                    >
+                        <Sparkles className="w-4 h-4" />
+                        미리듣기 모드
+                    </button>
+                    <button className="px-4 py-2 rounded-lg font-medium flex items-center gap-2 bg-hud-bg-secondary border border-hud-border-secondary text-hud-text-primary hover:bg-hud-bg-hover transition-all">
+                        <Filter className="w-4 h-4" />
+                        필터
+                    </button>
+                    <button className="px-4 py-2 rounded-lg font-medium flex items-center gap-2 bg-hud-accent-success/20 border border-hud-accent-success/30 text-hud-accent-success hover:bg-hud-accent-success/30 transition-all">
+                        <Check className="w-4 h-4" />
+                        모두 승인
+                    </button>
+                </div>
+
+                {/* Preview Mode Panel */}
+                {previewMode && (
+                    <div className="hud-card hud-card-bottom rounded-xl p-6 mb-6 border-l-4 border-hud-accent-primary">
+                        <div className="flex flex-col md:flex-row items-center gap-6">
+                            <div className="w-24 h-24 bg-gradient-to-br from-hud-accent-primary to-hud-accent-info rounded-xl flex items-center justify-center shrink-0">
+                                <Music className="w-10 h-10 text-white" />
+                            </div>
+                            <div className="flex-1 text-center md:text-left">
+                                <div className="text-sm text-hud-accent-primary mb-1">미리듣기 중...</div>
+                                <div className="text-xl font-bold text-hud-text-primary">{currentTrack.title}</div>
+                                <div className="text-hud-text-muted">{currentTrack.artist}</div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <button className="w-12 h-12 bg-hud-accent-danger/20 hover:bg-hud-accent-danger/30 border border-hud-accent-danger/30 rounded-full flex items-center justify-center text-hud-accent-danger transition-all">
+                                    <ThumbsDown className="w-5 h-5" />
+                                </button>
+                                <button
+                                    onClick={() => setCurrentTrack({ ...currentTrack, isPlaying: !currentTrack.isPlaying })}
+                                    className="w-14 h-14 bg-hud-accent-primary rounded-full flex items-center justify-center text-hud-bg-primary hover:bg-hud-accent-primary/90 transition-all"
+                                >
+                                    {currentTrack.isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" fill="currentColor" />}
+                                </button>
+                                <button className="w-12 h-12 bg-hud-accent-success/20 hover:bg-hud-accent-success/30 border border-hud-accent-success/30 rounded-full flex items-center justify-center text-hud-accent-success transition-all">
+                                    <ThumbsUp className="w-5 h-5" />
+                                </button>
+                                <button className="w-10 h-10 bg-hud-bg-secondary border border-hud-border-secondary rounded-full flex items-center justify-center text-hud-text-muted hover:text-hud-text-primary transition-all">
+                                    <SkipForward className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <div className="h-1 bg-hud-border-secondary rounded-full">
+                                <div className="h-full w-1/3 bg-hud-accent-primary rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* AI Verified Playlists */}
+                <section className="hud-card hud-card-bottom rounded-xl p-4 md:p-6">
+                    <h2 className="text-lg font-bold text-hud-text-primary flex items-center gap-2 mb-4">
+                        <Brain className="w-5 h-5 text-hud-accent-warning" />
+                        AI 검증 플레이리스트
+                    </h2>
+
+                    <div className="space-y-3">
+                        {playlists.map((playlist) => (
+                            <div key={playlist.id} className="bg-hud-bg-secondary/50 rounded-lg p-4 hover:bg-hud-bg-hover transition-all">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                                    {/* Cover */}
+                                    <div className="w-16 h-16 bg-gradient-to-br from-hud-accent-warning to-orange-400 rounded-lg flex items-center justify-center shrink-0">
+                                        <Music className="w-7 h-7 text-white" />
+                                    </div>
+
+                                    {/* Info */}
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <h3 className="font-semibold text-hud-text-primary">{playlist.title}</h3>
+                                            <span className={`px-2 py-0.5 rounded-full text-xs font-semibold border flex items-center gap-1 ${getScoreColor(playlist.aiScore)}`}>
+                                                <Star className="w-3 h-3" fill="currentColor" />
+                                                {playlist.aiScore}%
+                                            </span>
+                                        </div>
+                                        <div className="text-sm text-hud-text-muted mt-1">
+                                            {playlist.source} • {playlist.trackCount} tracks • 매칭 {playlist.matchedTracks}곡
+                                        </div>
+                                    </div>
+
+                                    {/* Actions */}
+                                    <div className="flex items-center gap-2">
+                                        <button className="w-9 h-9 bg-hud-bg-secondary border border-hud-border-secondary rounded-lg flex items-center justify-center text-hud-text-muted hover:text-hud-accent-info hover:border-hud-accent-info/30 transition-all">
+                                            <Eye className="w-4 h-4" />
+                                        </button>
+                                        <button className="w-9 h-9 bg-hud-bg-secondary border border-hud-border-secondary rounded-lg flex items-center justify-center text-hud-text-muted hover:text-hud-accent-primary hover:border-hud-accent-primary/30 transition-all">
+                                            <Play className="w-4 h-4" fill="currentColor" />
+                                        </button>
+                                        <button className="px-4 py-2 bg-hud-accent-success/20 border border-hud-accent-success/30 rounded-lg text-hud-accent-success text-sm font-medium flex items-center gap-1.5 hover:bg-hud-accent-success/30 transition-all">
+                                            <Check className="w-4 h-4" /> 승인
+                                        </button>
+                                        <button className="w-9 h-9 bg-hud-bg-secondary border border-hud-border-secondary rounded-lg flex items-center justify-center text-hud-text-muted hover:text-hud-accent-danger hover:border-hud-accent-danger/30 transition-all">
+                                            <X className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* View More */}
+                    <div className="mt-4 text-center">
+                        <button className="text-hud-accent-primary font-medium flex items-center gap-1 mx-auto hover:underline">
+                            더 많은 플레이리스트 보기 <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </section>
+
+                {/* High Score Tracks */}
+                <section className="hud-card hud-card-bottom rounded-xl p-4 md:p-6 mt-6">
+                    <h2 className="text-lg font-bold text-hud-text-primary flex items-center gap-2 mb-4">
+                        <Star className="w-5 h-5 text-hud-accent-success" fill="currentColor" />
+                        고득점 트랙 (85점 이상)
+                    </h2>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {[
+                            { title: 'Super Shy', artist: 'NewJeans', score: 98 },
+                            { title: 'Butter', artist: 'BTS', score: 96 },
+                            { title: 'Celebrity', artist: 'IU', score: 94 },
+                            { title: 'FLOWER', artist: 'JISOO', score: 92 },
+                            { title: 'Ditto', artist: 'NewJeans', score: 90 },
+                            { title: 'OMG', artist: 'NewJeans', score: 88 },
+                        ].map((track) => (
+                            <div key={track.title} className="flex items-center gap-3 bg-hud-bg-secondary/50 rounded-lg p-3 hover:bg-hud-bg-hover transition-all cursor-pointer group">
+                                <div className="w-10 h-10 bg-gradient-to-br from-hud-accent-success to-hud-accent-primary rounded-lg flex items-center justify-center shrink-0">
+                                    <Music className="w-4 h-4 text-white" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="font-medium text-hud-text-primary text-sm truncate group-hover:text-hud-accent-primary transition-colors">{track.title}</div>
+                                    <div className="text-xs text-hud-text-muted truncate">{track.artist}</div>
+                                </div>
+                                <span className="text-xs font-semibold text-hud-accent-success">{track.score}%</span>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </main>
+        </div>
+    )
+}
+
+export default GatewayMusicSpace

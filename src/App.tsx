@@ -60,6 +60,12 @@ import ChartJs from './pages/charts/ChartJs'
 import Error404 from './pages/Error404'
 import ComingSoon from './pages/ComingSoon'
 
+// Music Pages
+import MusicLounge from './pages/music/MusicLounge'
+import ExternalMusicSpace from './pages/music/ExternalMusicSpace'
+import MusicHome from './pages/music/MusicHome'
+import GatewayMusicSpace from './pages/music/GatewayMusicSpace'
+
 function App() {
     return (
         <Router>
@@ -122,6 +128,12 @@ function App() {
                     {/* Charts */}
                     <Route path="chart/chartjs" element={<ChartJs />} />
                 </Route>
+
+                {/* Music Pages (Separate Layout - No MainLayout) */}
+                <Route path="music/home" element={<MusicHome />} />
+                <Route path="music/lounge" element={<MusicLounge />} />
+                <Route path="music/lab" element={<GatewayMusicSpace />} />
+                <Route path="music/external-space" element={<ExternalMusicSpace />} />
 
                 {/* 404 Fallback */}
                 <Route path="*" element={<Error404 />} />

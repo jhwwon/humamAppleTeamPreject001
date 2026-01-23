@@ -33,6 +33,28 @@ export default {
                         primary: 'rgba(0, 255, 204, 0.3)',
                         secondary: 'rgba(255, 255, 255, 0.1)',
                     }
+                },
+                // Music PMS Theme Colors (Purple/Pink)
+                music: {
+                    primary: '#667eea',
+                    secondary: '#764ba2',
+                    accent: '#f093fb',
+                    pink: '#f5576c',
+                    bg: {
+                        primary: '#0f0c29',
+                        secondary: '#302b63',
+                        tertiary: '#24243e',
+                    }
+                },
+                // Music EMS Theme Colors (Amber/Yellow)
+                ems: {
+                    primary: '#eab308',
+                    secondary: '#f59e0b',
+                    bg: {
+                        primary: '#1a1a2e',
+                        secondary: '#16213e',
+                        tertiary: '#0f3460',
+                    }
                 }
             },
             fontFamily: {
