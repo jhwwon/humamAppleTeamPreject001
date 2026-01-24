@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 
 // Dashboard
@@ -80,8 +80,11 @@ function App() {
                 {/* Tidal Callback */}
                 <Route path="/tidal-callback" element={<TidalCallback />} />
 
+                {/* Root redirect to Music Home */}
+                <Route path="/" element={<Navigate to="/music/home" replace />} />
+
                 {/* Main Layout Pages */}
-                <Route path="/" element={<MainLayout />}>
+                <Route path="/dashboard" element={<MainLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="analytics" element={<Analytics />} />
 

@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { testConnection } from './config/db.js'
+import { testConnection, queryOne, insert } from './config/db.js'
 import tidalRoutes from './routes/tidal.js'
 import playlistRoutes from './routes/playlists.js'
 import itunesRoutes from './routes/itunes.js'
@@ -12,12 +12,35 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
-// Test database connection
-testConnection()
+// Seed default user if not exists
+async function seedDefaultUser() {
+    try {
+        const existingUser = await queryOne('SELECT user_id FROM users WHERE user_id = 1')
+        if (!existingUser) {
+            await insert(
+                'INSERT INTO users (user_id, email, password_hash, nickname) VALUES (1, ?, ?, ?)',
+                ['default@musicspace.local', 'not_for_login', 'Default User']
+            )
+            console.log('✅ Default user created (user_id=1)')
+        }
+    } catch (error) {
+        console.error('⚠️ Could not seed default user:', error.message)
+    }
+}
+
+// Initialize database
+async function initDatabase() {
+    const connected = await testConnection()
+    if (connected) {
+        await seedDefaultUser()
+    }
+}
+
+initDatabase()
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5610'],
+    origin: ['http://localhost:5173', 'http://localhost:5610', 'http://host.docker.internal:5173'],
     credentials: true
 }))
 app.use(express.json())

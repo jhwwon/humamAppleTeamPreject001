@@ -98,8 +98,12 @@ export const playlistsApi = {
 
     // Import Album as Playlist (Backend handles tracks in batch)
     importAlbumAsPlaylist: (album: { title: string; artist: string; tracks: any[]; coverImage: string }) =>
-        post<{ message: string; playlist: Playlist; count: number }>('/playlists/import-album', album)
+        post<{ message: string; playlist: Playlist; count: number }>('/playlists/import-album', album),
+
+    // Seed initial playlists (auto-load on first access)
+    seedPlaylists: () => post<{ message: string; imported: number; existing?: number }>('/playlists/seed', {})
 }
+
 
 export const analysisApi = {
     train: () => post<{ status: string; profile: any }>('/analysis/train', {}),

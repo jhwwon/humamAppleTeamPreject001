@@ -66,21 +66,28 @@ const ExternalMusicSpace = () => {
         try {
             setLoading(true)
             setError(null)
+
+            // Auto-seed on first load (imports Tidal/iTunes playlists if empty)
+            try {
+                const seedResult = await playlistsApi.seedPlaylists()
+                if (seedResult.imported > 0) {
+                    showToast(`${seedResult.imported}개 플레이리스트 자동 로드 완료!`, 'success')
+                }
+            } catch (seedErr) {
+                console.log('Seed skipped:', seedErr)
+            }
+
             const response = await playlistsApi.getPlaylists('EMS')
             setPlaylists(response.playlists.map(mapApiPlaylist))
         } catch (err) {
             console.error('Failed to fetch playlists:', err)
             setError('플레이리스트를 불러오는데 실패했습니다')
-            // Fallback to mock data
-            setPlaylists([
-                { id: 1, name: 'Summer Hits 2024', source: 'tidal', trackCount: 45, status: 'unverified', addedDate: '2024-01-20' },
-                { id: 2, name: 'Chill Vibes Collection', source: 'file', trackCount: 32, status: 'processing', addedDate: '2024-01-21' },
-                { id: 3, name: 'Rock Classics Mix', source: 'url', trackCount: 58, status: 'ready', addedDate: '2024-01-22' },
-            ])
+            setPlaylists([])
         } finally {
             setLoading(false)
         }
     }, [])
+
 
     // Check Connections
     const checkConnections = useCallback(async () => {
@@ -101,17 +108,36 @@ const ExternalMusicSpace = () => {
         checkConnections()
     }, [fetchPlaylists, checkConnections])
 
-    // Tidal Web Auth Handler (BYPASS / SIMULATION MODE)
+    // Tidal Web Auth Handler
     const handleWebLogin = () => {
-        // Mock Login for UX verification
-        console.log('Bypassing Tidal Auth for UI Verification')
-        handleTidalLoginSuccess({ username: 'Test User (Bypass)' })
-        /* 
-        // Real logic preserved for later:
         const width = 500
         const height = 700
-        ...
-        */
+        const left = window.screenX + (window.outerWidth - width) / 2
+        const top = window.screenY + (window.outerHeight - height) / 2
+
+        // Open Tidal login popup
+        const popup = window.open(
+            'http://localhost:3001/api/tidal/auth/login',
+            'TidalLogin',
+            `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no`
+        )
+
+        // Listen for success message from popup
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data?.type === 'TIDAL_LOGIN_SUCCESS') {
+                handleTidalLoginSuccess(event.data.user)
+                window.removeEventListener('message', handleMessage)
+            }
+        }
+        window.addEventListener('message', handleMessage)
+
+        // Cleanup if popup is closed without success
+        const checkPopup = setInterval(() => {
+            if (popup?.closed) {
+                clearInterval(checkPopup)
+                window.removeEventListener('message', handleMessage)
+            }
+        }, 1000)
     }
 
     // Handle Tidal Login Success
@@ -730,7 +756,7 @@ const ExternalMusicSpace = () => {
 
                     {error && !loading && (
                         <div className="bg-hud-accent-warning/10 border border-hud-accent-warning/30 rounded-lg p-4 mb-4">
-                            <p className="text-hud-accent-warning text-sm">{error} (Mock 데이터 표시 중)</p>
+                            <p className="text-hud-accent-warning text-sm">{error}</p>
                         </div>
                     )}
 

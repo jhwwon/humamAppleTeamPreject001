@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { Loader2, CheckCircle, XCircle } from 'lucide-react'
 import { tidalApi } from '../../services/api/tidal'
 
 const TidalCallback = () => {
     const [searchParams] = useSearchParams()
-    const navigate = useNavigate()
     const [status, setStatus] = useState<'processing' | 'success' | 'error'>('processing')
     const [errorMsg, setErrorMsg] = useState('')
+
+    // Check if this is a popup window
+    const isPopup = window.opener !== null || window.name === 'TidalLogin'
 
     useEffect(() => {
         const code = searchParams.get('code')
@@ -35,10 +37,16 @@ const TidalCallback = () => {
                 // Notify parent window if opened as popup
                 if (window.opener) {
                     window.opener.postMessage({ type: 'TIDAL_LOGIN_SUCCESS', user: response.user }, '*')
-                    setTimeout(() => window.close(), 1500)
-                } else {
-                    // Navigate back to external space if main window
-                    setTimeout(() => navigate('/music/external-space'), 1500)
+                }
+                // Always try to close if it's a popup
+                if (isPopup) {
+                    setTimeout(() => {
+                        try {
+                            window.close()
+                        } catch (e) {
+                            // If close fails, user will see "close this window" message
+                        }
+                    }, 1500)
                 }
             } else {
                 throw new Error('Exchange failed')
@@ -64,7 +72,13 @@ const TidalCallback = () => {
                     <div className="flex flex-col items-center gap-4">
                         <CheckCircle className="w-12 h-12 text-hud-accent-success" />
                         <h2 className="text-xl font-bold text-hud-accent-success">Login Successful!</h2>
-                        <p className="text-hud-text-secondary">This window will close automatically.</p>
+                        <p className="text-hud-text-secondary">이 창은 자동으로 닫힙니다.</p>
+                        <button
+                            onClick={() => window.close()}
+                            className="mt-2 bg-hud-accent-success text-white px-4 py-2 rounded-lg hover:bg-hud-accent-success/90"
+                        >
+                            창 닫기
+                        </button>
                     </div>
                 )}
 

@@ -524,4 +524,102 @@ router.delete('/:id/tracks/:trackId', async (req, res) => {
     }
 })
 
+// POST /api/playlists/seed - Auto-import initial playlists from Tidal & iTunes
+router.post('/seed', async (req, res) => {
+    try {
+        const { userId = 1, force = false } = req.body
+
+        // Check if already seeded (can be bypassed with force=true)
+        const existingCount = await queryOne(`
+            SELECT COUNT(*) as count FROM playlists 
+            WHERE user_id = ? AND space_type = 'EMS'
+        `, [userId])
+
+        console.log(`[Seed] Existing EMS count: ${existingCount.count}, force: ${force}`)
+
+        if (existingCount.count > 0 && !force) {
+            return res.json({ message: 'Already seeded', imported: 0, existing: existingCount.count })
+        }
+
+        let totalImported = 0
+        const errors = []
+
+        // 1. Fetch Tidal Featured Playlists (may fail if no auth)
+        try {
+            console.log('[Seed] Fetching Tidal featured...')
+            const tidalResponse = await fetch('http://localhost:3001/api/tidal/featured')
+            if (tidalResponse.ok) {
+                const tidalData = await tidalResponse.json()
+                const featuredPlaylists = tidalData.featured?.flatMap(f => f.playlists) || []
+                console.log(`[Seed] Tidal returned ${featuredPlaylists.length} playlists`)
+
+                for (const p of featuredPlaylists.slice(0, 10)) {
+                    try {
+                        await insert(`
+                            INSERT INTO playlists (user_id, title, description, space_type, status_flag, source_type, external_id, cover_image)
+                            VALUES (?, ?, ?, 'EMS', 'PTP', 'Platform', ?, ?)
+                        `, [userId, p.title, `Tidal: ${p.description || 'Curated'}`, p.uuid, p.squareImage || null])
+                        totalImported++
+                    } catch (e) {
+                        if (!e.message?.includes('Duplicate')) errors.push(`Tidal: ${e.message}`)
+                    }
+                }
+            } else {
+                console.log(`[Seed] Tidal failed with status: ${tidalResponse.status}`)
+            }
+        } catch (e) {
+            console.warn('[Seed] Tidal fetch failed:', e.message)
+            errors.push(`Tidal fetch: ${e.message}`)
+        }
+
+        // 2. Fetch iTunes Recommendations
+        try {
+            const genres = ['K-Pop', 'Classical', 'Jazz', 'Pop']
+            console.log(`[Seed] Fetching iTunes for genres: ${genres.join(', ')}`)
+
+            for (const genre of genres) {
+                try {
+                    const itunesResponse = await fetch(`http://localhost:3001/api/itunes/recommendations?genre=${encodeURIComponent(genre)}&limit=3`)
+                    if (itunesResponse.ok) {
+                        const itunesData = await itunesResponse.json()
+                        const albums = itunesData.recommendations || []
+                        console.log(`[Seed] iTunes ${genre}: ${albums.length} albums`)
+
+                        for (const album of albums.slice(0, 2)) {
+                            try {
+                                await insert(`
+                                    INSERT INTO playlists (user_id, title, description, space_type, status_flag, source_type, external_id, cover_image)
+                                    VALUES (?, ?, ?, 'EMS', 'PTP', 'Platform', ?, ?)
+                                `, [userId, album.title, `Apple Music: ${album.artist}`, `itunes_${album.id}`, album.artwork || null])
+                                totalImported++
+                                console.log(`[Seed] Imported: ${album.title}`)
+                            } catch (e) {
+                                if (!e.message?.includes('Duplicate')) {
+                                    errors.push(`iTunes ${album.title}: ${e.message}`)
+                                    console.error(`[Seed] Insert failed:`, e.message)
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.warn(`[Seed] iTunes ${genre} failed:`, e.message)
+                }
+            }
+        } catch (e) {
+            console.warn('[Seed] iTunes fetch failed:', e.message)
+            errors.push(`iTunes fetch: ${e.message}`)
+        }
+
+        console.log(`[Seed] Completed: ${totalImported} playlists imported`)
+        res.json({
+            message: 'Seed completed',
+            imported: totalImported,
+            errors: errors.length > 0 ? errors : undefined
+        })
+    } catch (error) {
+        console.error('[Seed] Error:', error)
+        res.status(500).json({ error: error.message })
+    }
+})
+
 export default router

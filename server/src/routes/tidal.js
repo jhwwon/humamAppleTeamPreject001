@@ -1,4 +1,5 @@
 import express from 'express'
+import crypto from 'crypto'
 
 const router = express.Router()
 
@@ -10,6 +11,16 @@ let cachedToken = null
 let tokenExpiry = null
 let userToken = null
 let userTokenExpiry = null
+let pkceVerifier = null // Store PKCE code_verifier
+
+// PKCE Helper Functions
+function generateCodeVerifier() {
+    return crypto.randomBytes(32).toString('base64url')
+}
+
+function generateCodeChallenge(verifier) {
+    return crypto.createHash('sha256').update(verifier).digest('base64url')
+}
 
 // Get Client Credentials Token
 async function getClientToken() {
@@ -81,13 +92,12 @@ async function tidalRequest(endpoint, params = {}) {
 router.post('/auth/device', async (req, res) => {
     try {
         const clientId = process.env.TIDAL_CLIENT_ID
-        // Using Open Access scope or default
-        // const scope = 'r_usr w_usr' 
+        const scopes = 'collection.read collection.write playlists.read playlists.write user.read recommendations.read search.read'
 
         const response = await fetch('https://auth.tidal.com/v1/oauth2/device_authorization', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `client_id=${clientId}&scope=r_usr`
+            body: `client_id=${clientId}&scope=${encodeURIComponent(scopes)}`
         })
 
         if (!response.ok) {
@@ -122,7 +132,7 @@ router.post('/auth/token', async (req, res) => {
                 'Authorization': `Basic ${credentials}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=${deviceCode}&scope=r_usr`
+            body: `grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=${deviceCode}`
         })
 
         const data = await response.json()
@@ -142,31 +152,45 @@ router.post('/auth/token', async (req, res) => {
 
 // --- WEB AUTH FLOW ---
 
-// GET /api/tidal/auth/login - Redirect to Tidal Login
+// GET /api/tidal/auth/login - Redirect to Tidal Login (with PKCE)
 router.get('/auth/login', (req, res) => {
     const clientId = process.env.TIDAL_CLIENT_ID
-    const redirectUri = 'http://localhost:5173/tidal-callback' // Frontend Callback Route
-    const scope = 'r_usr w_usr'
+    const redirectUri = 'http://localhost:5173/tidal-callback'
 
-    // Construct Authorization Code Flow URL
-    // Note: Tidal's documented auth URL for web is https://auth.tidal.com/v1/oauth2/authorize
-    // But some docs say login.tidal.com/oauth2/authorize. We stick to auth.tidal.com/v1
+    // Generate PKCE code_verifier and code_challenge
+    pkceVerifier = generateCodeVerifier()
+    const codeChallenge = generateCodeChallenge(pkceVerifier)
 
-    const authUrl = `https://auth.tidal.com/v1/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`
+    // Scopes matching Tidal Developer Portal configuration
+    const scopes = [
+        'collection.read',
+        'collection.write',
+        'playlists.read',
+        'playlists.write',
+        'playback',
+        'user.read',
+        'recommendations.read',
+        'entitlements.read',
+        'search.read',
+        'search.write'
+    ].join(' ')
 
-    // If called via AJAX, return URL. If browser, could redirect. 
-    // Ideally we just return the URL so frontend pops it up.
-    // However, if we use window.open('/api/...') it expects a page or redirect.
+    const authUrl = `https://login.tidal.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+
     res.redirect(authUrl)
 })
 
-// POST /api/tidal/auth/exchange - Exchange Code for Token
+// POST /api/tidal/auth/exchange - Exchange Code for Token (with PKCE)
 router.post('/auth/exchange', async (req, res) => {
     try {
         const { code } = req.body
         const clientId = process.env.TIDAL_CLIENT_ID
         const clientSecret = process.env.TIDAL_CLIENT_SECRET
         const redirectUri = 'http://localhost:5173/tidal-callback'
+
+        if (!pkceVerifier) {
+            return res.status(400).json({ success: false, error: 'PKCE verifier not found. Please restart login flow.' })
+        }
 
         const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
 
@@ -176,8 +200,11 @@ router.post('/auth/exchange', async (req, res) => {
                 'Authorization': `Basic ${credentials}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(redirectUri)}`
+            body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(redirectUri)}&code_verifier=${pkceVerifier}`
         })
+
+        // Clear the verifier after use
+        pkceVerifier = null
 
         const data = await response.json()
 
