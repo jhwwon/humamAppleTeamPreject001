@@ -246,10 +246,45 @@ router.get('/auth/status', async (req, res) => {
     }
 })
 
+// GET /api/tidal/search/universal - Search for multiple types
+router.get('/search/universal', async (req, res) => {
+    try {
+        const { query, limit = 10, countryCode = 'US' } = req.query
+
+        if (!query) return res.status(400).json({ error: 'Query is required' })
+
+        // Use Client Token for search to avoid scope issues
+        const token = await getClientToken()
+        const types = ['ARTISTS', 'ALBUMS', 'TRACKS', 'PLAYLISTS']
+
+        const params = new URLSearchParams({
+            query,
+            type: types.join(','),
+            limit,
+            countryCode
+        })
+
+        const response = await fetch(`${TIDAL_API_URL}/search?${params}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.tidal.v1+json'
+            }
+        })
+
+        if (!response.ok) throw new Error(await response.text())
+        const data = await response.json()
+
+        res.json(data)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
 // GET /api/tidal/search/playlists - Search playlists
 router.get('/search/playlists', async (req, res) => {
     try {
-        const { query = 'K-POP', limit = 10, countryCode = 'US' } = req.query
+        const { query = 'K-POP', limit = 10 } = req.query
 
         const data = await tidalRequest('/search', {
             query,
@@ -260,6 +295,39 @@ router.get('/search/playlists', async (req, res) => {
 
         res.json(data)
     } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
+
+// GET /api/tidal/recommendations - Get personalized recommendations (Mixes)
+router.get('/recommendations', async (req, res) => {
+    try {
+        const { countryCode = 'US', limit = 10 } = req.query
+
+        // Use Client Token for generic "Mix" search as fallback
+        // Since User Token 'r_usr' scope needed for true recommendations is unavailable/broken
+        const token = await getClientToken()
+        const params = new URLSearchParams({
+            query: 'Mix',
+            type: 'PLAYLISTS',
+            limit,
+            countryCode
+        })
+
+        const response = await fetch(`${TIDAL_API_URL}/search?${params}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.tidal.v1+json'
+            }
+        })
+
+        if (!response.ok) throw new Error(await response.text())
+        const data = await response.json()
+
+        res.json(data)
+    } catch (error) {
+        console.error('Recommendations error:', error)
         res.status(500).json({ error: error.message })
     }
 })
