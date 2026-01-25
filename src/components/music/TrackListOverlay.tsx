@@ -1,13 +1,14 @@
-import { X, Play, Clock, Music } from 'lucide-react'
+import { X, Play, Clock, Music, Trash2 } from 'lucide-react'
 import { PlaylistWithTracks } from '../../services/api/playlists'
 import { useMusic } from '../../context/MusicContext'
 
 interface TrackListOverlayProps {
     playlist: PlaylistWithTracks
     onClose: () => void
+    onRemoveTrack?: (trackId: number) => void
 }
 
-const TrackListOverlay = ({ playlist, onClose }: TrackListOverlayProps) => {
+const TrackListOverlay = ({ playlist, onClose, onRemoveTrack }: TrackListOverlayProps) => {
     const { playPlaylist, currentTrack, isPlaying, togglePlay } = useMusic()
 
     const formatDuration = (seconds: number) => {
@@ -81,11 +82,14 @@ const TrackListOverlay = ({ playlist, onClose }: TrackListOverlayProps) => {
                                             )}
                                         </div>
 
-                                        <div className="flex-1 min-w-0">
+                                        <div className="flex-[2] min-w-0">
                                             <h4 className={`text-sm font-medium truncate ${isCurrent ? 'text-hud-accent-primary' : 'text-hud-text-primary'}`}>
                                                 {track.title}
                                             </h4>
-                                            <p className="text-xs text-hud-text-muted truncate">
+                                        </div>
+
+                                        <div className="flex-1 min-w-0 hidden sm:block">
+                                            <p className="text-sm text-hud-text-secondary truncate">
                                                 {track.artist}
                                             </p>
                                         </div>
@@ -94,6 +98,19 @@ const TrackListOverlay = ({ playlist, onClose }: TrackListOverlayProps) => {
                                             <Clock className="w-3 h-3" />
                                             {formatDuration(track.duration)}
                                         </div>
+
+                                        {onRemoveTrack && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    onRemoveTrack(track.id)
+                                                }}
+                                                className="ml-2 p-1.5 rounded-full text-hud-text-muted hover:bg-red-500/10 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                                                title="Remove track"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        )}
                                     </div>
                                 )
                             })}

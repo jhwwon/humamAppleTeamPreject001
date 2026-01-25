@@ -29,10 +29,10 @@ const MusicSidebar = () => {
             <aside className={`fixed left-0 top-0 w-64 h-screen bg-hud-bg-secondary border-r border-hud-border-secondary z-50 overflow-y-auto transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
                 }`}>
                 {/* Logo */}
-                <div className="flex items-center gap-3 px-5 py-6">
+                <Link to="/" className="flex items-center gap-3 px-5 py-6">
                     <Music className="w-7 h-7 text-hud-accent-primary" />
                     <span className="text-2xl font-bold text-hud-accent-primary text-glow">MusicSpace</span>
-                </div>
+                </Link>
 
                 {/* 음악 공간 섹션 */}
                 <div className="mb-6 px-3">

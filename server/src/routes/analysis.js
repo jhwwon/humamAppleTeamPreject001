@@ -1,6 +1,6 @@
 import express from 'express'
 import { analysisService } from '../services/analysisService.js'
-import { db } from '../config/db.js'
+import { query } from '../config/db.js'
 
 const router = express.Router()
 
@@ -27,7 +27,7 @@ router.post('/evaluate/:id', async (req, res) => {
         // Update playlist status if score is good (Auto-Promote candidate)
         // PFP = Personal Filtered Playlist (Verified)
         if (result.score >= 70) {
-            await db.query(`
+            await query(`
                 UPDATE playlists 
                 SET status_flag = 'PFP', ai_score = ? 
                 WHERE playlist_id = ?

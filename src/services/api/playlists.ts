@@ -25,6 +25,12 @@ export interface Track {
     duration: number // in seconds
     isrc?: string
     orderIndex: number
+    externalMetadata?: {
+        youtubeId?: string;
+        previewUrl?: string;
+        thumbnail?: string;
+        [key: string]: any;
+    }
 }
 
 export interface PlaylistWithTracks extends Playlist {
@@ -83,6 +89,10 @@ export const playlistsApi = {
     // Move to different space (EMS -> GMS -> PMS)
     moveToSpace: (id: number, spaceType: Playlist['spaceType']) =>
         patch<Playlist>(`/playlists/${id}/move`, { spaceType }),
+
+    // Update details (Title/Description)
+    updateDetails: (id: number, details: { title: string, description?: string }) =>
+        patch<{ message: string, playlist: Playlist }>(`/playlists/${id}`, details),
 
     // Delete playlist
     delete: (id: number) => del<{ message: string; playlist: Playlist }>(`/playlists/${id}`),

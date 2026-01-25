@@ -1,0 +1,1162 @@
+
+[2026-01-25T10:43:47.024Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:43:47.037Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:44:48.079Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:44:48.093Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:30.039Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:30.046Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:46.534Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:46.540Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:54.839Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:54.845Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:55.996Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:56.004Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:57.038Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:57.044Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:57.911Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:47:57.918Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:00.244Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:00.252Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:05.618Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:05.624Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:11.765Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:48:11.771Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:03.065Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:03.074Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:06.389Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:06.398Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:21.222Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:21.242Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.131Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.135Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.138Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.145Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.148Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:22.160Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":7,"email":"jowoosung4@gmail.com"}
+- Resolved userId: 7
+----------------------------------------
+
+[2026-01-25T10:49:47.945Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:49:47.948Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:49:47.952Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:49:47.957Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:49:47.960Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:49:47.962Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:01.776Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:01.782Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:10.322Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:10.328Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:11.411Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:11.418Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:12.144Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:12.151Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.973Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.975Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.978Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.985Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.988Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:16.990Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:23.577Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:23.584Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:31.666Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:50:31.672Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.289Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.291Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.295Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.302Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.305Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:51:32.310Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T10:52:32.140Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:32.144Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:32.147Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:32.153Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:32.157Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:32.161Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:49.876Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:52:49.884Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:53:07.590Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:53:07.687Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:53:07.705Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:53:09.299Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:53:09.306Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:57:45.886Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:57:45.894Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:57:47.004Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:59:12.459Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:59:12.465Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:59:36.849Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T10:59:36.861Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:00:49.211Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:09:11.889Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:11:44.876Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:11:44.883Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:11:45.921Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:13:27.875Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:13:27.880Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:16:10.269Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:16:10.281Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:18:12.360Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:18:17.422Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:23:49.133Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:23:49.144Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:41:06.156Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:06.159Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:06.163Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:06.177Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:06.181Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:06.189Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.881Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.885Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.889Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.895Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.900Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:13.907Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:16.572Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:16.579Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:25.546Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:25.561Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:27.987Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:27.993Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:50.372Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:41:50.378Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.498Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.502Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.506Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.520Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.524Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:29.528Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":3,"email":"jowoosung@gmail.com"}
+- Resolved userId: 3
+----------------------------------------
+
+[2026-01-25T11:42:42.124Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:42:42.127Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:42:42.131Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:42:42.137Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:42:42.140Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:42:42.143Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":2,"email":"imapplepie20@icloud.com"}
+- Resolved userId: 2
+----------------------------------------
+
+[2026-01-25T11:43:05.692Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:05.696Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:05.699Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:05.707Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:05.711Z] Request to /playlists
+- Query: {"spaceType":"GMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:05.715Z] Request to /playlists
+- Query: {"spaceType":"EMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:12.013Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T11:43:12.022Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:55:19.415Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:55:19.425Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:55:22.831Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:55:22.841Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:59:25.879Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T12:59:25.887Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:00:02.909Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:00:02.917Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:08:16.529Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:08:16.538Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:10:02.030Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:10:02.040Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:10:02.196Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:10:09.341Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:10:09.347Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:13:06.151Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:13:06.165Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:13:06.239Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:14:03.357Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:14:03.365Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:14:03.453Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:18:05.429Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:18:05.438Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:19:03.234Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:19:03.241Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:26:42.445Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:26:42.450Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:27:40.482Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------
+
+[2026-01-25T13:27:40.495Z] Request to /playlists
+- Query: {"spaceType":"PMS"}
+- Headers.Authorization: Present
+- req.user: {"userId":10,"email":"jowoosung20@gmail.com"}
+- Resolved userId: 10
+----------------------------------------

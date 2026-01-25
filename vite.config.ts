@@ -13,5 +13,23 @@ export default defineConfig({
         host: true,     // 외부 접속 허용 (0.0.0.0)
         port: 5173,     // 포트 번호
         allowedHosts: ['host.docker.internal', 'localhost'],
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3001',
+                changeOrigin: true,
+                secure: false
+            }
+        }
     },
+    build: {
+        target: 'esnext' // Allow top-level await
+    },
+    esbuild: {
+        target: 'esnext' // Allow top-level await
+    },
+    optimizeDeps: {
+        esbuildOptions: {
+            target: 'esnext'
+        }
+    }
 })

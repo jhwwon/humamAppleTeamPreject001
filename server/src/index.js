@@ -5,6 +5,7 @@ import { testConnection, queryOne, insert } from './config/db.js'
 import authRoutes from './routes/auth.js'
 import tidalRoutes from './routes/tidal.js'
 import playlistRoutes from './routes/playlists.js'
+import analysisRoutes from './routes/analysis.js'
 import itunesRoutes from './routes/itunes.js'
 import youtubeRoutes from './routes/youtube.js'
 
@@ -55,6 +56,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/tidal', tidalRoutes)
 app.use('/api/playlists', playlistRoutes)
+app.use('/api/analysis', analysisRoutes)
 app.use('/api/itunes', itunesRoutes)
 app.use('/api/youtube', youtubeRoutes)
 

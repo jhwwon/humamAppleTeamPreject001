@@ -1,4 +1,4 @@
-import { db } from '../config/db.js'
+import { query } from '../config/db.js'
 
 // Simple in-memory store for demo purposes
 // In production, this would be Redis or a UserProfile table
@@ -9,7 +9,8 @@ export const analysisService = {
     trainModel: async (userId) => {
         try {
             // 1. Fetch all tracks from user's "Platform" playlists (Tidal, YouTube)
-            const [rows] = await db.query(`
+            // wrapper 'query' returns rows directly
+            const rows = await query(`
                 SELECT t.artist, t.external_metadata 
                 FROM tracks t
                 JOIN playlist_tracks pt ON t.track_id = pt.track_id
@@ -80,7 +81,7 @@ export const analysisService = {
         }
 
         // Fetch playlist tracks
-        const [tracks] = await db.query(`
+        const tracks = await query(`
             SELECT t.artist, t.title
             FROM tracks t
             JOIN playlist_tracks pt ON t.track_id = pt.track_id

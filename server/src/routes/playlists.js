@@ -1,12 +1,38 @@
 import express from 'express'
 import { query, queryOne, insert, execute } from '../config/db.js'
+import { optionalAuth } from '../middleware/auth.js'
+import fs from 'fs'
+import path from 'path'
 
 const router = express.Router()
 
 // GET /api/playlists - Get all playlists with filters
-router.get('/', async (req, res) => {
+router.get('/', optionalAuth, async (req, res) => {
     try {
-        const { spaceType, status, userId = 1 } = req.query
+        let { spaceType, status, userId } = req.query
+
+        // Use authenticated user ID if available
+        if (req.user && req.user.userId) {
+            userId = req.user.userId
+        }
+
+        // If userId is not provided (or extracted from token), return empty to avoid leaking other users' data
+        if (!userId) {
+            return res.json({ playlists: [], total: 0 })
+        }
+
+        // DEBUG: Write to file
+        const debugInfo = `
+[${new Date().toISOString()}] Request to /playlists
+- Query: ${JSON.stringify(req.query)}
+- Headers.Authorization: ${req.headers.authorization ? 'Present' : 'Missing'}
+- req.user: ${JSON.stringify(req.user)}
+- Resolved userId: ${userId}
+----------------------------------------
+`
+        fs.appendFileSync(path.join(process.cwd(), 'debug_log.txt'), debugInfo)
+
+        console.log(`[Playlists] Fetching for userId: ${userId}, spaceType: ${spaceType || 'ALL'}, status: ${status || 'ALL'}`)
 
         let sql = `
             SELECT 
@@ -42,12 +68,54 @@ router.get('/', async (req, res) => {
 
         const playlists = await query(sql, params)
 
+        // Process image URLs
+        const processedPlaylists = playlists.map(p => {
+            let image = p.coverImage
+            if (p.sourceType === 'Platform' && p.externalId && !image?.startsWith('http')) {
+                // Tidal Image Logic: resources.tidal.com/images/{uuid}/640x640.jpg
+                // UUID requires '-' replaced by '/'
+                if (image) {
+                    const tidalPath = image.replace(/-/g, '/')
+                    image = `https://resources.tidal.com/images/${tidalPath}/640x640.jpg`
+                }
+            }
+            return { ...p, coverImage: image }
+        })
+
         res.json({
-            playlists,
+            playlists: processedPlaylists,
             total: playlists.length
         })
     } catch (error) {
         console.error('Error fetching playlists:', error)
+        res.status(500).json({ error: error.message })
+    }
+})
+
+// PATCH /api/playlists/:id - Update playlist details (Title/Description)
+router.patch('/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const { title, description } = req.body
+
+        if (!title) {
+            return res.status(400).json({ error: 'Title is required' })
+        }
+
+        const affected = await execute(`
+            UPDATE playlists SET title = ?, description = ? WHERE playlist_id = ?
+        `, [title, description || '', id])
+
+        if (affected === 0) {
+            return res.status(404).json({ error: 'Playlist not found' })
+        }
+
+        res.json({
+            message: 'Playlist updated',
+            playlist: { id, title, description }
+        })
+    } catch (error) {
+        console.error('Error updating playlist:', error)
         res.status(500).json({ error: error.message })
     }
 })
@@ -75,6 +143,16 @@ router.get('/:id', async (req, res) => {
         if (!playlist) {
             return res.status(404).json({ error: 'Playlist not found' })
         }
+
+        // Process image URL
+        let image = playlist.coverImage
+        if (playlist.sourceType === 'Platform' && playlist.externalId && !image?.startsWith('http')) {
+            if (image) {
+                const tidalPath = image.replace(/-/g, '/')
+                image = `https://resources.tidal.com/images/${tidalPath}/640x640.jpg`
+            }
+        }
+        playlist.coverImage = image
 
         // Get tracks
         const tracks = await query(`
