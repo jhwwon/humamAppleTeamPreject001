@@ -18,7 +18,7 @@ export interface AudioState {
 
 class AudioService {
     private static instance: AudioService
-    private player: ReactPlayer | null = null
+    private player: any | null = null
     public state: AudioState = {
         isPlaying: false,
         currentTime: 0,
@@ -42,7 +42,7 @@ class AudioService {
     }
 
     // Set ReactPlayer reference
-    public setPlayer(player: ReactPlayer | null) {
+    public setPlayer(player: any | null) {
         this.player = player
     }
 

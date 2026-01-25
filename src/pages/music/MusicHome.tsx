@@ -72,7 +72,7 @@ const MusicHome = () => {
                 const tidalFeatured = await tidalApi.getFeatured()
                 if (tidalFeatured?.featured?.[0]?.playlists?.[0]) {
                     const firstPlaylist = tidalFeatured.featured[0].playlists[0]
-                    const details = await tidalApi.getPlaylistItems(firstPlaylist.uuid)
+                    const details: any = await tidalApi.getPlaylistItems(firstPlaylist.uuid)
                     setTidalTracks((details.items || []).slice(0, 5).map((t: any) => ({
                         title: t.title || t.name || 'Unknown',
                         artist: t.artist || t.artists?.[0]?.name || 'Unknown'
