@@ -5,7 +5,7 @@ import { audioService } from '../../services/audio/AudioService'
 import ReactPlayer from 'react-player'
 
 const MusicPlayer = () => {
-    const { currentTrack, isPlaying, togglePlay, audioState, resolvedUrl } = useMusic()
+    const { currentTrack, isPlaying, togglePlay, audioState, resolvedUrl, playNext, playPrevious } = useMusic()
     const [localProgress, setLocalProgress] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
     const [volume, setVolume] = useState(70)
@@ -57,6 +57,7 @@ const MusicPlayer = () => {
                     onBuffer={audioService.onBuffer}
                     onBufferEnd={audioService.onBufferEnd}
                     onError={audioService.onError}
+                    onEnded={playNext}
                     width="0"
                     height="0"
                     config={{
@@ -88,7 +89,9 @@ const MusicPlayer = () => {
                     <button className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-muted hover:text-hud-accent-primary transition-colors">
                         <Shuffle className="w-4 h-4" />
                     </button>
-                    <button className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-secondary hover:text-hud-accent-primary transition-colors">
+                    <button 
+                        onClick={playPrevious}
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-secondary hover:text-hud-accent-primary transition-colors">
                         <SkipBack className="w-4 h-4" />
                     </button>
                     <button
@@ -104,7 +107,9 @@ const MusicPlayer = () => {
                             <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
                         )}
                     </button>
-                    <button className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-secondary hover:text-hud-accent-primary transition-colors">
+                    <button 
+                        onClick={playNext}
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-secondary hover:text-hud-accent-primary transition-colors">
                         <SkipForward className="w-4 h-4" />
                     </button>
                     <button className="w-8 h-8 rounded-full flex items-center justify-center text-hud-text-muted hover:text-hud-accent-primary transition-colors">

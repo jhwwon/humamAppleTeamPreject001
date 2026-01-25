@@ -18,6 +18,16 @@ export default defineConfig({
                 target: 'http://localhost:3001',
                 changeOrigin: true,
                 secure: false
+            },
+            '/apple-proxy': {
+                target: 'https://amp-api-edge.music.apple.com/v1',
+                changeOrigin: true,
+                secure: true,
+                rewrite: (path) => path.replace(/^\/apple-proxy/, ''),
+                headers: {
+                    'Origin': 'https://music.apple.com',
+                    'Referer': 'https://music.apple.com/'
+                }
             }
         }
     },

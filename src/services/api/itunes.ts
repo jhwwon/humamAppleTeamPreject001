@@ -9,6 +9,7 @@ export interface ItunesTrack {
     audio: string;
     url: string;
     date: string;
+    previewUrl?: string; // Alias for audio/preview
 }
 
 export interface ItunesCollection {
@@ -23,8 +24,12 @@ export interface ItunesCollection {
 
 export const itunesService = {
     search: async (term: string) => {
-        const response = await get<{ results: ItunesTrack[] }>(`/itunes/search?term=${term}`);
-        return response.results;
+        const response = await get<{ results: any[] }>(`/itunes/search?term=${term}`);
+        // Map backend response to interface if needed, or pass through
+        return response.results.map(item => ({
+            ...item,
+            previewUrl: item.audio || item.previewUrl // Ensure previewUrl is populated
+        })) as ItunesTrack[];
     },
 
     getRecommendations: async (genre?: string) => {

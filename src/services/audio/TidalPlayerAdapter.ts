@@ -11,14 +11,27 @@ export const initTidalPlayer = async () => {
         // @ts-ignore
         const { createPlayer } = await import('@tidal-music/player')
 
-        // We need to fetch the token from our backend or localStorage
-        // Ideally we use the /api/tidal/auth/token endpoint
-        const token = localStorage.getItem('tidal_token')
-        if (!token) throw new Error('No Tidal token found')
+        // Fetch token from correct storage key
+        let token = localStorage.getItem('tidal_token')
+        
+        // Fallback: Check full login result object if simple token missing
+        if (!token) {
+            const storedResult = localStorage.getItem('tidal_login_result')
+            if (storedResult) {
+                try {
+                    const parsed = JSON.parse(storedResult)
+                    token = parsed.response?.access_token || parsed.access_token
+                } catch (e) {
+                    console.warn('[TidalSDK] Failed to parse stored login result')
+                }
+            }
+        }
+
+        if (!token) throw new Error('No Tidal access token found. Please login again.')
 
         tidalPlayer = await createPlayer({
-            outputDevices: true,
-            volume: 1.0
+            volume: 1.0,
+            audioQuality: 'LOSSLESS' // Downgrade from HI_RES to LOSSLESS for better compatibility
         })
 
         // Authorize with the token

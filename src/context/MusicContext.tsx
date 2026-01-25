@@ -10,6 +10,8 @@ interface MusicContextType {
     togglePlay: () => void
     setQueue: (tracks: Track[]) => void
     playPlaylist: (tracks: Track[], startIndex?: number) => void
+    playNext: () => void
+    playPrevious: () => void
     audioState: AudioState
     resolvedUrl: string | null
 }
@@ -68,13 +70,28 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    const playNext = () => {
+        if (!currentTrack || queue.length === 0) return
+
+        const currentIndex = queue.findIndex(t => t.id === currentTrack.id)
+        if (currentIndex !== -1 && currentIndex < queue.length - 1) {
+            playTrack(queue[currentIndex + 1])
+        }
+    }
+
+    const playPrevious = () => {
+        if (!currentTrack || queue.length === 0) return
+
+        const currentIndex = queue.findIndex(t => t.id === currentTrack.id)
+        if (currentIndex > 0) {
+            playTrack(queue[currentIndex - 1])
+        }
+    }
+
     // Auto-advance
     useEffect(() => {
-        if (audioState.duration > 0 && audioState.currentTime >= audioState.duration - 0.5) {
-            // Track finished (simple check)
-            // Ideally ReactPlayer onEnded event should drive this, but this works for now check
-        }
-    }, [audioState.currentTime, audioState.duration])
+        // We rely on the player's onEnded event instead of checking time here
+    }, [])
 
     return (
         <MusicContext.Provider
@@ -86,6 +103,8 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
                 togglePlay,
                 setQueue,
                 playPlaylist,
+                playNext,
+                playPrevious,
                 audioState, // Expose full audio state
                 resolvedUrl // Pass resolved URL to Player
             }}
