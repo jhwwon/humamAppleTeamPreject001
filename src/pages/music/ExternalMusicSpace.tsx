@@ -10,6 +10,18 @@ import { itunesService, ItunesTrack, ItunesCollection } from '../../services/api
 import { appleMusicApi, AppleMusicItem } from '../../services/api/apple'
 import { Plus, DownloadCloud } from 'lucide-react'
 
+const getStatusBadge = (status: string) => {
+    switch (status) {
+        case 'ready':
+            return <span className="inline-flex px-2 py-1 rounded bg-hud-accent-success/20 text-hud-accent-success text-xs font-medium border border-hud-accent-success/30">Ready</span>
+        case 'processing':
+            return <span className="inline-flex px-2 py-1 rounded bg-hud-accent-info/20 text-hud-accent-info text-xs font-medium border border-hud-accent-info/30">Processing</span>
+        case 'unverified':
+        default:
+            return <span className="inline-flex px-2 py-1 rounded bg-hud-accent-warning/20 text-hud-accent-warning text-xs font-medium border border-hud-accent-warning/30">Unverified</span>
+    }
+}
+
 interface Playlist {
     id: number
     name: string
@@ -136,7 +148,7 @@ const ExternalMusicSpace = () => {
                 if (data.songs.length > 0 || data.playlists.length > 0) {
                     setIsAutoImporting(true)
                     showToast('Apple Music 데이터를 DB에 자동 저장 중...', 'success')
-                    
+
                     let importedCount = 0
 
                     // Import Playlists
@@ -153,25 +165,25 @@ const ExternalMusicSpace = () => {
                             importedCount++
 
                             // Import Tracks for this playlist (Best effort)
-                             try {
-                                 const tracksData = await appleMusicApi.getTracks(playlist.id, 'playlists')
-                                 for (const t of tracksData) {
-                                     if (t.type === 'songs') {
-                                         await playlistsApi.addTrack(createResult.playlist.id, {
-                                             title: t.attributes.name,
-                                             artist: t.attributes.artistName,
-                                             album: t.attributes.albumName || '',
-                                             artwork: t.attributes.artwork?.url.replace('{w}', '300').replace('{h}', '300'),
-                                             externalMetadata: {
-                                                 appleMusicId: t.id,
-                                                 previewUrl: (t.attributes.previews && t.attributes.previews[0]) ? t.attributes.previews[0].url : undefined
-                                             }
-                                         })
-                                     }
-                                 }
-                             } catch (e) { console.warn('Track import failed for playlist', playlist.id) }
+                            try {
+                                const tracksData = await appleMusicApi.getTracks(playlist.id, 'playlists')
+                                for (const t of tracksData) {
+                                    if (t.type === 'songs') {
+                                        await playlistsApi.addTrack(createResult.playlist.id, {
+                                            title: t.attributes.name,
+                                            artist: t.attributes.artistName,
+                                            album: t.attributes.albumName || '',
+                                            artwork: t.attributes.artwork?.url.replace('{w}', '300').replace('{h}', '300'),
+                                            externalMetadata: {
+                                                appleMusicId: t.id,
+                                                previewUrl: (t.attributes.previews && t.attributes.previews[0]) ? t.attributes.previews[0].url : undefined
+                                            }
+                                        })
+                                    }
+                                }
+                            } catch (e) { console.warn('Track import failed for playlist', playlist.id) }
 
-                        } catch (e) { 
+                        } catch (e) {
                             // Ignore duplicates (409)
                         }
                     }
@@ -188,17 +200,17 @@ const ExternalMusicSpace = () => {
                                 status: 'PTP',
                                 coverImage: data.songs[0].attributes.artwork?.url.replace('{w}', '600').replace('{h}', '600')
                             })
-                            
+
                             for (const song of data.songs) {
                                 await playlistsApi.addTrack(chartPlaylist.id, {
                                     title: song.attributes.name,
                                     artist: song.attributes.artistName,
                                     album: song.attributes.albumName,
                                     artwork: song.attributes.artwork?.url.replace('{w}', '300').replace('{h}', '300'),
-                                     externalMetadata: {
-                                         appleMusicId: song.id,
-                                         previewUrl: (song.attributes.previews && song.attributes.previews[0]) ? song.attributes.previews[0].url : undefined
-                                     }
+                                    externalMetadata: {
+                                        appleMusicId: song.id,
+                                        previewUrl: (song.attributes.previews && song.attributes.previews[0]) ? song.attributes.previews[0].url : undefined
+                                    }
                                 })
                             }
                             importedCount++
@@ -273,7 +285,7 @@ const ExternalMusicSpace = () => {
     const handleTidalLoginSuccess = (user: any) => {
         setTidalUserLoggedIn(true)
         showToast(`Tidal 연결 성공! (${user?.username || 'User'})`, 'success')
-        checkConnections() 
+        checkConnections()
     }
 
     const handleTidalSync = async () => {
@@ -430,7 +442,7 @@ const ExternalMusicSpace = () => {
         try {
             const today = new Date().toLocaleDateString('ko-KR')
             const title = `EMS Collection (${today})`
-            
+
             const createResult = await playlistsApi.create({
                 title: title,
                 description: `Created from EMS Search Cart (${cartTracks.length} tracks)`,
@@ -484,10 +496,10 @@ const ExternalMusicSpace = () => {
     // --- View Detail (Sync & Open Modal) ---
     const handleViewDetail = async (appleId: string, title: string, type: 'songs' | 'playlists' | 'albums' = 'playlists') => {
         let targetId: number | null = null
-        
+
         // 1. Find existing playlist
-        const match = playlists.find(p => p.name === title) 
-        
+        const match = playlists.find(p => p.name === title)
+
         if (match) {
             targetId = match.id
         } else {
@@ -497,7 +509,7 @@ const ExternalMusicSpace = () => {
                 let item: any
                 if (type === 'playlists') item = newReleases.playlists.find(p => p.id === appleId)
                 else if (type === 'albums') item = newReleases.albums.find(p => p.id === appleId)
-                
+
                 const createResult = await playlistsApi.create({
                     title: title,
                     description: item?.attributes?.editorialNotes?.short || `Imported from Apple Music (${type})`,
@@ -518,31 +530,31 @@ const ExternalMusicSpace = () => {
         if (targetId) {
             try {
                 if (type === 'playlists' || type === 'albums') {
-                     const tracksData = await appleMusicApi.getTracks(appleId, type)
-                     let addedCount = 0
-                     for (const t of tracksData) {
-                         if (t.type === 'songs') {
-                             try {
-                                 await playlistsApi.addTrack(targetId, {
-                                     title: t.attributes.name,
-                                     artist: t.attributes.artistName,
-                                     album: t.attributes.albumName || '',
-                                     artwork: t.attributes.artwork?.url.replace('{w}', '300').replace('{h}', '300'),
-                                     externalMetadata: {
-                                         appleMusicId: t.id,
-                                         previewUrl: (t.attributes.previews && t.attributes.previews[0]) ? t.attributes.previews[0].url : undefined
-                                     }
-                                 })
-                                 addedCount++
-                             } catch (e) { /* Ignore duplicates */ }
-                         }
-                     }
-                     if (addedCount > 0) showToast(`${addedCount}곡 상세 정보 저장 완료`, 'success')
+                    const tracksData = await appleMusicApi.getTracks(appleId, type)
+                    let addedCount = 0
+                    for (const t of tracksData) {
+                        if (t.type === 'songs') {
+                            try {
+                                await playlistsApi.addTrack(targetId, {
+                                    title: t.attributes.name,
+                                    artist: t.attributes.artistName,
+                                    album: t.attributes.albumName || '',
+                                    artwork: t.attributes.artwork?.url.replace('{w}', '300').replace('{h}', '300'),
+                                    externalMetadata: {
+                                        appleMusicId: t.id,
+                                        previewUrl: (t.attributes.previews && t.attributes.previews[0]) ? t.attributes.previews[0].url : undefined
+                                    }
+                                })
+                                addedCount++
+                            } catch (e) { /* Ignore duplicates */ }
+                        }
+                    }
+                    if (addedCount > 0) showToast(`${addedCount}곡 상세 정보 저장 완료`, 'success')
                 }
-                
+
                 await fetchPlaylists()
                 setSelectedDetailId(targetId)
-                
+
             } catch (e) {
                 console.error('Track sync failed', e)
                 setSelectedDetailId(targetId)
@@ -612,7 +624,7 @@ const ExternalMusicSpace = () => {
         setAnalyzingId(id)
         try {
             const result = await analysisApi.evaluate(id)
-            
+
             if (result.score >= 70) {
                 await playlistsApi.moveToSpace(id, 'GMS')
                 await playlistsApi.updateStatus(id, 'PTP')
@@ -622,7 +634,7 @@ const ExternalMusicSpace = () => {
                 showToast(`AI 분석 완료: ${result.grade}등급 (${result.score}점) - 보류됨`, 'success')
                 fetchPlaylists()
             }
-            
+
         } catch (err) {
             console.error('Analysis failed', err)
             showToast('분석 실패', 'error')
@@ -720,7 +732,7 @@ const ExternalMusicSpace = () => {
                             <Filter className="w-4 h-4" />
                             Advanced Filter
                         </button>
-                        <button 
+                        <button
                             onClick={() => document.getElementById('fileInput')?.click()}
                             className="bg-hud-accent-warning text-hud-bg-primary px-4 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-hud-accent-warning/90 transition-all">
                             <LinkIcon className="w-4 h-4" />
@@ -1083,7 +1095,7 @@ const ExternalMusicSpace = () => {
                                             <div className="font-medium text-hud-text-primary truncate">{track.title}</div>
                                             <div className="text-xs text-hud-text-secondary truncate">{track.artist}</div>
                                         </div>
-                                        <button 
+                                        <button
                                             onClick={() => removeFromCart(track.id)}
                                             className="text-hud-text-muted hover:text-red-500 transition-colors"
                                         >

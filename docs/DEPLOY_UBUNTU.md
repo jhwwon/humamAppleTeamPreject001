@@ -79,7 +79,7 @@ docker exec -i musicspace-db mariadb -u musicspace -pmusicspace123 music_space_d
 ```bash
 cd server
 npm install
-npm run build   # 필요한 경우
+# npm run build  <-- 백엔드는 빌드 과정이 필요 없습니다.
 pm2 start src/index.js --name "musicspace-api" --watch
 pm2 save
 pm2 startup
