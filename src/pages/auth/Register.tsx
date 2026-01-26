@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Mail, Lock, User, Eye, EyeOff, Loader2, Music } from 'lucide-react'
+import { Mail, Lock, User, Eye, EyeOff, Loader2, Music, Heart, ChevronDown, ChevronUp } from 'lucide-react'
 import Button from '../../components/common/Button'
 import { register } from '../../services/api/auth'
 import { useAuth } from '../../contexts/AuthContext'
 import TermsModal from '../../components/auth/TermsModal'
 import PrivacyModal from '../../components/auth/PrivacyModal'
+import { genresApi, GenreCategory } from '../../services/api/genres'
 
 const STREAMING_SERVICES = [
     { id: 'tidal', name: 'Tidal', icon: 'T', color: 'bg-black', activeColor: 'bg-hud-accent-primary text-hud-bg-primary' },
     { id: 'youtube', name: 'YouTube', icon: '▶', color: 'bg-[#FF0000]/10 text-[#FF0000]', activeColor: 'bg-[#FF0000] text-white' },
-    { id: 'apple', name: 'Apple', icon: '', color: 'bg-gradient-to-br from-pink-500 to-orange-400', activeColor: 'bg-pink-500 text-white' },
+    { id: 'apple', name: 'Apple', icon: '', color: 'bg-gradient-to-br from-pink-500 to-orange-400', activeColor: 'bg-pink-500 text-white' },
     { id: 'spotify', name: 'Spotify', icon: '●', color: 'bg-[#1DB954]/10 text-[#1DB954]', activeColor: 'bg-[#1DB954] text-black' },
     { id: 'other', name: '이외', icon: '...', color: 'bg-hud-bg-secondary text-hud-text-muted', activeColor: 'bg-hud-text-muted text-hud-bg-primary' },
 ]
@@ -30,12 +31,45 @@ const Register = () => {
     const [isPrivacyOpen, setIsPrivacyOpen] = useState(false)
     const [streamingServices, setStreamingServices] = useState<string[]>([])
     const [otherService, setOtherService] = useState('')
+    
+    // 장르 관련 상태
+    const [genreCategories, setGenreCategories] = useState<GenreCategory[]>([])
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([])
+    const [genresLoading, setGenresLoading] = useState(true)
+    const [expandedCategories, setExpandedCategories] = useState<string[]>(['popular']) // 기본으로 인기장르 펼침
+
+    // 장르 목록 로드
+    useEffect(() => {
+        const loadGenres = async () => {
+            setGenresLoading(true)
+            const categories = await genresApi.getGenresGrouped()
+            setGenreCategories(categories)
+            setGenresLoading(false)
+        }
+        loadGenres()
+    }, [])
+
+    const toggleCategory = (categoryCode: string) => {
+        setExpandedCategories(prev =>
+            prev.includes(categoryCode)
+                ? prev.filter(code => code !== categoryCode)
+                : [...prev, categoryCode]
+        )
+    }
 
     const toggleStreamingService = (serviceId: string) => {
         setStreamingServices(prev =>
             prev.includes(serviceId)
                 ? prev.filter(id => id !== serviceId)
                 : [...prev, serviceId]
+        )
+    }
+
+    const toggleGenre = (genreCode: string) => {
+        setSelectedGenres(prev =>
+            prev.includes(genreCode)
+                ? prev.filter(code => code !== genreCode)
+                : [...prev, genreCode]
         )
     }
 
@@ -64,6 +98,11 @@ const Register = () => {
             return
         }
 
+        if (selectedGenres.length === 0) {
+            setError('최소 1개 이상의 음악 장르를 선택해주세요')
+            return
+        }
+
         setIsLoading(true)
 
         try {
@@ -76,7 +115,8 @@ const Register = () => {
                 name,
                 email,
                 password,
-                streamingServices: finalServices
+                streamingServices: finalServices,
+                genres: selectedGenres
             })
             setUser(response.user)
 
@@ -185,15 +225,121 @@ const Register = () => {
                             </div>
                         </div>
 
+                        {/* Favorite Genres - Category Grouped */}
+                        <div className="flex flex-col gap-3 pt-2">
+                            <div className="flex items-center gap-2">
+                                <div className="h-[1px] flex-1 bg-hud-border-secondary/50"></div>
+                                <Heart className="w-4 h-4 text-hud-accent-danger" />
+                                <span className="text-[10px] uppercase tracking-wider font-bold text-hud-text-muted px-2">좋아하는 장르</span>
+                                <div className="h-[1px] flex-1 bg-hud-border-secondary/50"></div>
+                            </div>
+                            <p className="text-[11px] text-hud-text-muted text-center -mt-1 mb-1">
+                                선호하는 음악 장르를 선택해주세요. (최소 1개)
+                            </p>
+                            
+                            {genresLoading ? (
+                                <div className="flex justify-center py-4">
+                                    <Loader2 className="w-6 h-6 animate-spin text-hud-accent-primary" />
+                                </div>
+                            ) : (
+                                <div className="max-h-64 overflow-y-auto pr-1 custom-scrollbar space-y-2">
+                                    {genreCategories.map((category) => (
+                                        <div key={category.code} className="border border-hud-border-secondary rounded-lg overflow-hidden">
+                                            {/* Category Header */}
+                                            <button
+                                                type="button"
+                                                onClick={() => toggleCategory(category.code)}
+                                                className="w-full flex items-center justify-between px-3 py-2 bg-hud-bg-secondary/50 hover:bg-hud-bg-secondary transition-colors"
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-base">{category.icon}</span>
+                                                    <span className="text-xs font-semibold text-hud-text-primary">{category.nameKo}</span>
+                                                    <span className="text-[10px] text-hud-text-muted">({category.genres.length})</span>
+                                                    {/* 선택된 장르 수 표시 */}
+                                                    {category.genres.filter(g => selectedGenres.includes(g.code)).length > 0 && (
+                                                        <span className="px-1.5 py-0.5 bg-hud-accent-primary text-hud-bg-primary text-[9px] font-bold rounded-full">
+                                                            {category.genres.filter(g => selectedGenres.includes(g.code)).length}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                {expandedCategories.includes(category.code) ? (
+                                                    <ChevronUp className="w-4 h-4 text-hud-text-muted" />
+                                                ) : (
+                                                    <ChevronDown className="w-4 h-4 text-hud-text-muted" />
+                                                )}
+                                            </button>
+                                            
+                                            {/* Genre List */}
+                                            {expandedCategories.includes(category.code) && (
+                                                <div className="p-2 grid grid-cols-4 gap-1.5 bg-hud-bg-primary">
+                                                    {category.genres.map((genre) => (
+                                                        <button
+                                                            key={genre.code}
+                                                            type="button"
+                                                            onClick={() => toggleGenre(genre.code)}
+                                                            className={`flex flex-col items-center justify-center p-1.5 rounded-lg transition-all border ${
+                                                                selectedGenres.includes(genre.code)
+                                                                    ? 'border-hud-accent-primary bg-hud-accent-primary/20'
+                                                                    : 'border-transparent hover:border-hud-border-secondary hover:bg-hud-bg-secondary/30'
+                                                            }`}
+                                                            title={genre.nameEn}
+                                                        >
+                                                            <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${genre.color} flex items-center justify-center mb-0.5 ${
+                                                                selectedGenres.includes(genre.code) ? 'ring-2 ring-hud-accent-primary ring-offset-1 ring-offset-hud-bg-primary' : ''
+                                                            }`}>
+                                                                <span className="text-xs">{genre.icon}</span>
+                                                            </div>
+                                                            <span className={`text-[9px] font-medium text-center leading-tight ${
+                                                                selectedGenres.includes(genre.code) ? 'text-hud-accent-primary' : 'text-hud-text-muted'
+                                                            }`}>
+                                                                {genre.nameKo}
+                                                            </span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Selected Genres Tags */}
+                            {selectedGenres.length > 0 && (
+                                <div className="flex flex-wrap gap-1.5 mt-2 p-2 bg-hud-bg-secondary/30 rounded-lg">
+                                    <span className="text-[10px] text-hud-text-muted mr-1">선택됨:</span>
+                                    {selectedGenres.map(code => {
+                                        // 모든 카테고리에서 장르 찾기
+                                        const genre = genreCategories.flatMap(c => c.genres).find(g => g.code === code)
+                                        return genre ? (
+                                            <span 
+                                                key={code}
+                                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-hud-accent-primary/20 text-hud-accent-primary rounded-full text-[10px] font-medium"
+                                            >
+                                                {genre.icon} {genre.nameKo}
+                                                <button 
+                                                    type="button"
+                                                    onClick={() => toggleGenre(code)}
+                                                    className="ml-0.5 hover:text-hud-accent-danger"
+                                                >
+                                                    x
+                                                </button>
+                                            </span>
+                                        ) : null
+                                    })}
+                                </div>
+                            )}
+                        </div>
+
                         {/* Streaming Services */}
                         <div className="flex flex-col gap-3 pt-2">
                             <div className="flex items-center gap-2">
                                 <div className="h-[1px] flex-1 bg-hud-border-secondary/50"></div>
-                                <span className="text-[10px] uppercase tracking-wider font-bold text-hud-text-muted px-2">함께해요</span>
+                                <Music className="w-4 h-4 text-hud-accent-info" />
+                                <span className="text-[10px] uppercase tracking-wider font-bold text-hud-text-muted px-2">스트리밍 서비스</span>
                                 <div className="h-[1px] flex-1 bg-hud-border-secondary/50"></div>
                             </div>
                             <p className="text-[11px] text-hud-text-muted text-center -mt-1 mb-1">
-                                구독 중이신 서비스를 선택해주세요.
+                                구독 중이신 서비스를 선택해주세요. (선택사항)
                             </p>
                             <div className="grid grid-cols-5 gap-1.5">
                                 {STREAMING_SERVICES.map((service) => (
@@ -224,9 +370,6 @@ const Register = () => {
                                     className="w-full mt-3 px-4 py-3 bg-hud-bg-primary border border-hud-border-secondary rounded-lg text-hud-text-primary placeholder-hud-text-muted focus:outline-none focus:border-hud-accent-primary transition-hud"
                                 />
                             )}
-                            <p className="text-xs text-hud-text-muted mt-2">
-                                * 여러 개 선택 가능합니다
-                            </p>
                         </div>
 
                         {/* Terms */}

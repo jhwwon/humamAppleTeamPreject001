@@ -22,6 +22,7 @@ export interface RegisterRequest {
     email: string
     password: string
     streamingServices?: string[]
+    genres?: string[]
 }
 
 // Token management
