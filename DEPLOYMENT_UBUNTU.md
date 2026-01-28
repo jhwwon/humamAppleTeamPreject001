@@ -25,6 +25,24 @@
 - `musicspace-backend` - Node.js API 서버 :3001
 - `musicspace-db` - MariaDB 데이터베이스 :3306
 
+**주요 설정 파일:**
+```
+humamAppleTeamPreject001/
+├── Dockerfile              # 프론트엔드 Docker 이미지 (Nginx)
+├── nginx.conf              # Nginx 설정 (API 프록시, SPA 라우팅)
+├── docker-compose.yml      # 전체 스택 구성
+├── .env                    # 환경 변수 (직접 생성)
+├── .env.docker             # 환경 변수 템플릿
+└── server/
+    └── Dockerfile          # 백엔드 Docker 이미지 (Node.js)
+```
+
+**nginx.conf 역할:**
+- `/api/*` 요청 → backend:3001 프록시
+- `/images/*` 요청 → backend:3001 프록시 (이미지 서빙)
+- 그 외 요청 → React SPA (index.html)
+- Docker 빌드 시 자동으로 컨테이너에 포함됨
+
 ---
 
 ## 1. 사전 요구사항
